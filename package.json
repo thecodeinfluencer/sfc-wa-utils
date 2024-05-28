@@ -1,6 +1,6 @@
 {
   "name": "@thecodeinfluencer/sfc-wa-utils",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A bunch of utility functions for my web applications.",
   "main": "index.js",
   "scripts": {
@@ -24,5 +24,8 @@
     "@types/node": "^20.12.12",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "publishConfig": {
+    "@thecodeinfluencer:registry": "https://npm.pkg.github.com"
   }
 }
