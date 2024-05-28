@@ -1,0 +1,28 @@
+{
+  "name": "sfc-wa-utils",
+  "version": "0.0.1",
+  "description": "A bunch of utility functions for my web applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecodeinfluencer/sfc-wa-utils.git"
+  },
+  "author": "thecodeinfluencer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thecodeinfluencer/sfc-wa-utils/issues"
+  },
+  "homepage": "https://github.com/thecodeinfluencer/sfc-wa-utils#readme",
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "next-auth": "^4.24.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
