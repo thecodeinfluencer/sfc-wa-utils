@@ -5,5 +5,4 @@ export * from "./functions/globalStyles";
 export * from "./functions/handleErrorResponse";
 export * from "./functions/serverUserFromSession";
 export * from "./functions/spice";
-export * from "./functions/unspice";
 export * from "./functions/usageLogging";
