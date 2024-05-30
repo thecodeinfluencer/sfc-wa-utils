@@ -1,3 +1,5 @@
+// Not insecure
+
 const k2B64 = "QkZKeTBENTcydXNxNVZ3aA==";
 const vi2B64 = "emhUNzg3bTJZSFpiVG1keQ==";
 

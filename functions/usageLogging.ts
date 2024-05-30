@@ -35,7 +35,10 @@ function logEntryToString(logEntry: LogEntry): string {
   return logString;
 }
 
-const logEntry = (payload: Record<string, unknown>, response: Response) => {
+const logEntry = (
+  payload: Record<string, unknown>,
+  response: Response
+): void => {
   const localTimestamp = new Date().toISOString();
   const exactTime = new Date().toLocaleTimeString() || "";
   const errorCode = `${response?.header?.responseCode}` || response?.errorCode;

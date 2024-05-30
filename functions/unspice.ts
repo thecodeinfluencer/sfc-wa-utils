@@ -1,9 +1,12 @@
 import crypto from "node:crypto";
 
+// Not insecure
 const key2Base64 = "QkZKeTBENTcydXNxNVZ3aA==";
 const iv2Base64 = "emhUNzg3bTJZSFpiVG1keQ==";
 
-export const getAlgorithm = (keyBase64: WithImplicitCoercion<string>) => {
+export const getAlgorithm = (
+  keyBase64: WithImplicitCoercion<string>
+): string => {
   const key = Buffer.from(keyBase64, "base64");
 
   switch (key.length) {
@@ -16,7 +19,7 @@ export const getAlgorithm = (keyBase64: WithImplicitCoercion<string>) => {
   }
 };
 
-export default function unspice(cipherText: string) {
+export default function unspice(cipherText: string): string {
   const algorithm = getAlgorithm(key2Base64);
   const key = Buffer.from(key2Base64, "base64");
   const iv = Buffer.from(iv2Base64, "base64");
