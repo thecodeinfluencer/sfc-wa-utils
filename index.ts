@@ -1,8 +1,9 @@
 export * from "./functions/dateFormat";
-export * from "./functions/parseJwt";
-export * from "./functions/getFilteredRows";
+export { default as getFilteredRows } from "./functions/getFilteredRows";
 export * from "./functions/globalStyles";
 export * from "./functions/handleErrorResponse";
-export * from "./functions/serverUserFromSession";
-export * from "./functions/spice";
+export { default as handleErrorResponse } from "./functions/handleErrorResponse";
+export { default as parseJwt } from "./functions/parseJwt";
+export { default as serverUserFromSession } from "./functions/serverUserFromSession";
+export { default as spice } from "./functions/spice";
 export * from "./functions/usageLogging";
