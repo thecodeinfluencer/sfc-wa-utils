@@ -3,7 +3,7 @@
 const k2B64 = "QkZKeTBENTcydXNxNVZ3aA==";
 const vi2B64 = "emhUNzg3bTJZSFpiVG1keQ==";
 
-export default async function spice(plainText: string) {
+export default async function spice(plainText: string): Promise<string> {
   const sk = await window.crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(atob(k2B64)),

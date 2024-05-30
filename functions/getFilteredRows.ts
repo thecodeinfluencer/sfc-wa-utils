@@ -1,4 +1,7 @@
-export default function getFilteredRows(data: any[], searchInput: string) {
+export default function getFilteredRows(
+  data: any[],
+  searchInput: string
+): any[] {
   if (!Array.isArray(data)) return [];
 
   return (
