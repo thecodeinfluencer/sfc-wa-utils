@@ -35,7 +35,7 @@ function logEntryToString(logEntry: LogEntry): string {
   return logString;
 }
 
-const logEntry = (
+export const logEntry = (
   payload: Record<string, unknown>,
   response: Response
 ): void => {
@@ -63,5 +63,3 @@ const logEntry = (
 
   if (isDev) console.info(logMessage);
 };
-
-export { logEntry };
