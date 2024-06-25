@@ -6,7 +6,7 @@ export default function getFilteredRows(
 
   return (
     data
-      ?.map((obj: any, idx: number) => ({ ...obj, id: idx + 1 }))
+      ?.map((obj: any, idx: number) => ({ ...obj, idx: idx + 1 }))
       ?.map((r: any, idx: number) => ({ ...r, idx }))
       ?.filter((row: any) =>
         Object.values(row).some(
