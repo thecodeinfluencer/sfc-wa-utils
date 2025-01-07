@@ -32,7 +32,7 @@ function logEntryToString(logEntry: LogEntry): string {
 export const logEntry = (
   payload: Record<string, unknown>,
   { responseMessage, responseCode, timestamp }: Response
-) => {
+): void => {
   const localTimestamp = new Date().toISOString();
   const exactTime = new Date().toLocaleTimeString() || "";
   const errorCode = responseCode || "200";
