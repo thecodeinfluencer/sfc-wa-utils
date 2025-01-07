@@ -1,6 +1,6 @@
 {
   "name": "@thecodeinfluencer/sfc-wa-utils",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "A bunch of utility functions for my web applications.",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/thecodeinfluencer/sfc-wa-utils#readme",
   "dependencies": {
     "date-fns": "^3.6.0",
-    "next-auth": "^4.24.7"
+    "next-auth": "^4.24.8"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
