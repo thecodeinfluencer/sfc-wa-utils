@@ -3,31 +3,40 @@ import { logEntry } from "./usageLogging";
 const isDev = process.env.NODE_ENV === "development";
 
 export default function handleErrorResponse(request: Request, error: any) {
-  const { url, method } = request;
+  const { url, method, body } = request;
 
-  if (isDev)
-    console.warn(`${url} ${method} error =====>> `, error?.response?.data);
+  const headers = error?.response?.config?.headers;
+  const fullURL = error?.response?.config?.url;
+  const data = error?.response?.config?.data;
 
-  const responseCode = error.response?.data?.header?.responseCode || 400;
+  if (isDev) {
+    console.warn(
+      `===== START ERROR =====\n${url} ${method} => `,
+      error?.response?.data || error?.message || error,
+      { fullURL, body, data, headers },
+      `\n===== END ERROR =====`
+    );
+  }
+
+  const responseCode =
+    error?.response?.status ||
+    error?.header?.responseCode ||
+    error.response?.data?.header?.responseCode ||
+    400;
+
   const responseMessage =
-    error.response?.data?.message ||
+    error?.header?.customerMessage ||
+    error?.message ||
     error.response?.data?.header?.customerMessage ||
+    error.response?.data?.message ||
     "Something went wrong";
 
-  (async () => {
-    if (!isDev)
-      logEntry(
-        {
-          url,
-          method,
-          secretKey: undefined,
-          password: undefined,
-          phoneNumber: undefined,
-          phone: undefined,
-        },
-        error.response?.data || error?.message
-      );
-  })();
+  if (!isDev) {
+    logEntry(
+      { url, method, secretKey: undefined, password: undefined },
+      { responseMessage, responseCode }
+    );
+  }
 
   return Response.json(
     { error: error.response?.data, message: responseMessage },
@@ -36,12 +45,24 @@ export default function handleErrorResponse(request: Request, error: any) {
 }
 
 export function handleNormalError(tag: string, error: any, payload?: any) {
-  const err =
+  const responseCode =
+    error?.response?.status ||
+    error?.header?.responseCode ||
+    error.response?.data?.header?.responseCode ||
+    400;
+
+  const responseMessage =
+    error?.header?.customerMessage ||
+    error?.message ||
     error.response?.data?.header?.customerMessage ||
-    error.response?.data ||
-    error.message;
+    error.response?.data?.message ||
+    "Something went wrong";
 
-  if (isDev) console.warn(`${tag}  error =====> `, err);
+  if (isDev) console.warn(`${tag} ERROR =====> `, responseMessage);
 
-  if (!isDev) logEntry(payload as Record<string, unknown>, err);
+  if (!isDev)
+    logEntry(payload as Record<string, unknown>, {
+      responseMessage,
+      responseCode,
+    });
 }

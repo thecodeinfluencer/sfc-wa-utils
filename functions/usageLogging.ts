@@ -3,22 +3,16 @@ interface LogEntry {
   timestamp: string;
   level: string;
   type: string;
-  statusCode: number;
+  statusCode: number | string;
   status: string;
   message: string;
   payload: Record<string, unknown>;
 }
 
 type Response = {
-  errorCode?: string;
-  errorMessage?: string;
-  message?: string;
-  header: {
-    responseCode: number;
-    responseMessage: string;
-    customerMessage: string;
-    timestamp: string;
-  };
+  responseCode: number | string;
+  responseMessage: string;
+  timestamp?: string;
 };
 
 const isDev = process.env.NODE_ENV === "development";
@@ -37,29 +31,24 @@ function logEntryToString(logEntry: LogEntry): string {
 
 export const logEntry = (
   payload: Record<string, unknown>,
-  response: Response
-): void => {
+  { responseMessage, responseCode, timestamp }: Response
+) => {
   const localTimestamp = new Date().toISOString();
   const exactTime = new Date().toLocaleTimeString() || "";
-  const errorCode = `${response?.header?.responseCode}` || response?.errorCode;
-  const headerMessage = `${response?.header?.responseMessage} . ${response?.header?.customerMessage}`;
-  const responseMessage: string =
-    headerMessage.length > 0
-      ? headerMessage
-      : response?.errorMessage ?? response?.message ?? "Something went wrong";
+  const errorCode = responseCode || "200";
 
   const logEntry: LogEntry = {
     exactTime,
-    timestamp: response?.header?.timestamp || localTimestamp,
+    timestamp: timestamp ?? localTimestamp,
     level: "INFO",
     type: "stats",
-    statusCode: response?.header?.responseCode || 400,
-    status: errorCode == "200" || errorCode == "201" ? "success" : "failure",
-    message: responseMessage || "request failed",
+    statusCode: responseCode || 400,
+    status: errorCode == "200" || errorCode == "201" ? "SUCCESS" : "FAILURE", //
+    message: responseMessage,
     payload,
   };
 
-  const logMessage = logEntryToString(logEntry) || "[ERROR] Log entry failed]";
+  const logMessage = logEntryToString(logEntry) || "[ERROR] Log Entry Failed]";
 
-  if (isDev) console.info(logMessage);
+  if (!isDev) console.log(logMessage);
 };
