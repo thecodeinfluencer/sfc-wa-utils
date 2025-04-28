@@ -15,8 +15,7 @@ const authOptions: NextAuthOptions = {
 };
 
 (async () => {
-  const { username } = await serverUserFromSession(authOptions);
-  console.log(username);
+  console.log((await serverUserFromSession(authOptions))?.email);
 })();
 
 //  npx ts-node __tests__/serverUserFromSession.test.ts
